@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtkpvnvvh2ul2"]
+
+[sub_resource type="GDScript" id="GDScript_miquq"]
+script/source = "extends Area2D
+
+var battle = preload(\"res://Battle Scene/battle.tscn\")
+
+
+func _on_body_entered(body):
+	if \"Player\" in body.name:
+		$\"../UI/Anim\".play(\"Transition\")
+		get_tree().paused = true
+
+func _process(delta):
+	if $\"../UI/Anim\".current_animation == \"Transition\":
+		if $\"../UI/Anim\".get_current_animation_position() >= 1.5:
+			var battleTemp = battle.instantiate()
+			
+			get_parent().add_child(battleTemp)
+			queue_free()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4y0pg"]
+radius = 23.0
+
+[node name="DokiMon" type="Area2D"]
+process_mode = 3
+position = Vector2(189, 126)
+script = SubResource("GDScript_miquq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4y0pg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

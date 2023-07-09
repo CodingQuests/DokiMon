@@ -1,0 +1,321 @@
+[gd_scene load_steps=12 format=3 uid="uid://duow6sbliaai6"]
+
+[ext_resource type="Script" path="res://Battle Scene/battle.gd" id="1_40q3x"]
+[ext_resource type="Texture2D" uid="uid://bqtomgcd6qflp" path="res://Free Sample/Battle/spr_battle_empty.png" id="2_eb71n"]
+[ext_resource type="Script" path="res://Battle Scene/UI.gd" id="3_oxqud"]
+[ext_resource type="Script" path="res://Battle Scene/MonsterUI.gd" id="3_pqip0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_biape"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mddrw"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si2f1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ym0jd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxap0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg1lr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cx2v5"]
+
+[node name="Battle" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_40q3x")
+
+[node name="SprBattleEmpty" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("2_eb71n")
+
+[node name="MonsterUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(3, 3)
+script = ExtResource("3_pqip0")
+
+[node name="Info" type="Label" parent="MonsterUI"]
+layout_mode = 0
+offset_left = 18.6667
+offset_top = 8.0
+offset_right = 154.667
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Dokimon lvl 100"
+
+[node name="HPBar" type="ProgressBar" parent="MonsterUI"]
+layout_mode = 0
+offset_left = 47.6667
+offset_top = 21.0
+offset_right = 154.667
+offset_bottom = 29.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_biape")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mddrw")
+value = 50.0
+show_percentage = false
+
+[node name="HpTxt" type="Label" parent="MonsterUI"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 117.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(344, 432)
+scale = Vector2(3, 3)
+
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2(792, 296)
+scale = Vector2(3, 3)
+
+[node name="Action" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 512.0
+offset_right = 648.0
+offset_bottom = 624.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 58
+text = "This is an action!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(3, 3)
+script = ExtResource("3_oxqud")
+
+[node name="Menu" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 237.333
+offset_top = 173.333
+offset_right = 311.333
+offset_bottom = 217.333
+theme_override_constants/separation = 840
+
+[node name="GridContainer" type="GridContainer" parent="UI/Menu"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+columns = 2
+
+[node name="Fight" type="Button" parent="UI/Menu/GridContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Switch")
+focus_neighbor_bottom = NodePath("../Capture")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Fight"
+
+[node name="Switch" type="Button" parent="UI/Menu/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Fight")
+focus_neighbor_bottom = NodePath("../Flee")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Switch"
+
+[node name="Capture" type="Button" parent="UI/Menu/GridContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Fight")
+focus_neighbor_right = NodePath("../Flee")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Capture"
+
+[node name="Flee" type="Button" parent="UI/Menu/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Capture")
+focus_neighbor_top = NodePath("../Switch")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Fleee"
+
+[node name="Fight" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 237.333
+offset_top = 173.333
+offset_right = 311.333
+offset_bottom = 217.333
+theme_override_constants/separation = 840
+
+[node name="GridContainer" type="GridContainer" parent="UI/Fight"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+columns = 2
+
+[node name="Attack 1" type="Button" parent="UI/Fight/GridContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Attack 3")
+focus_neighbor_bottom = NodePath("../Attack 2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Blast"
+
+[node name="Attack 3" type="Button" parent="UI/Fight/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Attack 1")
+focus_neighbor_bottom = NodePath("../Back")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Blast"
+
+[node name="Attack 2" type="Button" parent="UI/Fight/GridContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Attack 1")
+focus_neighbor_right = NodePath("../Back")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Impact"
+
+[node name="Back" type="Button" parent="UI/Fight/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Attack 2")
+focus_neighbor_top = NodePath("../Attack 3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Back"
+
+[node name="Switch" type="HBoxContainer" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 237.333
+offset_top = 173.333
+offset_right = 311.333
+offset_bottom = 217.333
+theme_override_constants/separation = 840
+
+[node name="GridContainer" type="GridContainer" parent="UI/Switch"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+columns = 2
+
+[node name="Dokimon 1" type="Button" parent="UI/Switch/GridContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Dokimon 3")
+focus_neighbor_bottom = NodePath("../Dokimon 2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Fight"
+
+[node name="Dokimon 3" type="Button" parent="UI/Switch/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Dokimon 1")
+focus_neighbor_bottom = NodePath("../Back")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Switch"
+
+[node name="Dokimon 2" type="Button" parent="UI/Switch/GridContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Dokimon 1")
+focus_neighbor_right = NodePath("../Back")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Capture"
+
+[node name="Back" type="Button" parent="UI/Switch/GridContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Dokimon 2")
+focus_neighbor_top = NodePath("../Dokimon 3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si2f1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ym0jd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oxap0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg1lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx2v5")
+text = "Back"
+
+[node name="Info" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 123.0
+offset_right = 376.0
+offset_bottom = 138.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Dokimon lvl 100"
+
+[node name="HpTxt" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 141.0
+offset_right = 378.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 136.0
+offset_right = 376.0
+offset_bottom = 144.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_biape")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mddrw")
+value = 50.0
+show_percentage = false
+
+[connection signal="pressed" from="UI/Menu/GridContainer/Fight" to="UI" method="_on_fight_pressed"]
+[connection signal="pressed" from="UI/Menu/GridContainer/Switch" to="UI" method="_on_switch_pressed"]
+[connection signal="pressed" from="UI/Menu/GridContainer/Capture" to="." method="_on_capture_pressed"]
+[connection signal="pressed" from="UI/Menu/GridContainer/Flee" to="UI" method="_on_flee_pressed"]
+[connection signal="pressed" from="UI/Fight/GridContainer/Attack 1" to="UI" method="_on_attack_pressed" binds= [0]]
+[connection signal="pressed" from="UI/Fight/GridContainer/Attack 3" to="UI" method="_on_attack_pressed" binds= [2]]
+[connection signal="pressed" from="UI/Fight/GridContainer/Attack 2" to="UI" method="_on_attack_pressed" binds= [1]]
+[connection signal="pressed" from="UI/Fight/GridContainer/Back" to="UI" method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Switch/GridContainer/Dokimon 1" to="UI" method="_on_dokimon_pressed" binds= [0]]
+[connection signal="pressed" from="UI/Switch/GridContainer/Dokimon 3" to="UI" method="_on_dokimon_pressed" binds= [2]]
+[connection signal="pressed" from="UI/Switch/GridContainer/Dokimon 2" to="UI" method="_on_dokimon_pressed" binds= [1]]
+[connection signal="pressed" from="UI/Switch/GridContainer/Back" to="UI" method="_on_back_pressed"]
